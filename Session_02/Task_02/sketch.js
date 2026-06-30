@@ -1,31 +1,72 @@
+let flowerCount = 20;
+let canvasWidth = 400;
+let canvasHeight = 400;
+
+let spacing = canvasHeight/flowerCount;
+
+let offset = spacing * 0.5
+
+let dinoX = canvasWidth / 2;
+let dinoY = canvasHeight / 2;
+
+
 function setup() {
-    createCanvas(800, 600);
+    createCanvas(canvasWidth, canvasHeight);
+
+    //noLoop();
+    frameRate(2);
+
+    angleMode(DEGREES);
 }
 
 function draw() {
-    background(220);
+    background(105, 19, 40);
 
-    dino(0, 0, 0.5, 189);
+    for( let i=0; i<flowerCount; i++){
+        for ( let j=0; j<flowerCount; j++){
+
+            flower(
+                i*spacing + offset, 
+                j*spacing + offset,
+            );
+        
+        }
+    }
+
+    let c = random([0], [255]);
+    dino (dinoX, dinoY, 0.3, c);
 }
 
-//Legs 
-function legs() {
 
-begingShape();
-vertex(336, 474);
-vertex(360, 484);
-vertex(362, 532);
-vertex(515, 532);
-endShape(CLOSE);
+function flower (centreX, centreY) {
+    push();
+    translate (centreX, centreY)
+    let rotation = random([0, 90, 180, 270]);
+    rotate(rotation)
 
+    noStroke();
+
+    fill('pink');
+    circle(centreX, centreY - 20, 20);
+    circle(centreX + 7, centreY + 3, 20);
+    circle(centreX - 10, centreY - 10, 20);
+    circle(centreX - 7, centreY + 3, 20);
+    circle(centreX + 10, centreY - 10, 20);
+
+    fill('yellow');
+    circle(centreX, centreY - 8, 10);
+
+    pop();
 }
-
 
 function dino (x, y, s, g) {
 
-    push ();  
+    push();  
     translate (x,y);
     scale (s);
+
+    push();
+    translate(-470, -410);
 
     //Behind
     fill(g-20, 180, 150);
@@ -67,6 +108,14 @@ function dino (x, y, s, g) {
     //eyes
     fill(0);
     noStroke();
-    circle(217, 160, 22)
+    circle(217, 160, 22);
 
+    pop();
+    pop();
+
+}
+
+function mouseMoved() {
+    dinoX = mouseX;
+    dinoY = mouseY;
 }

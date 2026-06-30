@@ -1,8 +1,8 @@
-let circlesCount = 20;
+let trianglesCount = 20;
 let canvasWidth = 400;
 let canvasHeight = 400;
 
-let spacing = canvasHeight/circlesCount;
+let spacing = canvasHeight/trianglesCount;
 
 let offset = spacing * 0.5
 
@@ -22,8 +22,8 @@ function setup() {
 function draw() {
     background('lightblue');
 
-    for( let i=0; i<circlesCount; i++){
-        for ( let j=0; j<circlesCount; j++){
+    for( let i=0; i<trianglesCount; i++){
+        for ( let j=0; j<trianglesCount; j++){
         
             drawTriangle(
                 i*spacing + offset, 
