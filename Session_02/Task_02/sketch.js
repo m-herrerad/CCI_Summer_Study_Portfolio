@@ -1,10 +1,13 @@
 let flowerCount = 20;
 let canvasWidth = 400;
 let canvasHeight = 400;
+let dinoCount = 10;
 
 let spacing = canvasHeight/flowerCount;
+let spacing2 = canvasHeight/dinoCount;
 
 let offset = spacing * 0.5
+let offset2 = spacing2 * 0.5
 
 let dinoX = canvasWidth / 2;
 let dinoY = canvasHeight / 2;
@@ -20,7 +23,7 @@ function setup() {
 }
 
 function draw() {
-    background(105, 19, 40);
+    background(121, 153, 171);
 
     for( let i=0; i<flowerCount; i++){
         for ( let j=0; j<flowerCount; j++){
@@ -28,25 +31,42 @@ function draw() {
             flower(
                 i*spacing + offset, 
                 j*spacing + offset,
+                0.2,
             );
         
         }
     }
 
     let c = random([0], [255]);
-    dino (dinoX, dinoY, 0.3, c);
+
+    for( let i=0; i<dinoCount; i++){
+        for ( let j=0; j<dinoCount; j++){
+
+            dino(
+                i*spacing2 + offset + 10, 
+                j*spacing2 + offset + 10 ,
+                0.05,
+                c,
+            );
+        
+        }
+    }
+
+
+    dino (dinoX, dinoY, 0.3, 0);
 }
 
 
-function flower (centreX, centreY) {
+function flower (centreX, centreY, s) {
     push();
-    translate (centreX, centreY)
+    translate (centreX, centreY);
+    scale(s);
     let rotation = random([0, 90, 180, 270]);
     rotate(rotation)
 
     noStroke();
 
-    fill('pink');
+    fill(117, 49, random([0], [150]));
     circle(centreX, centreY - 20, 20);
     circle(centreX + 7, centreY + 3, 20);
     circle(centreX - 10, centreY - 10, 20);
