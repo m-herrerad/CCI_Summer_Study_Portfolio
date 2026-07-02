@@ -1,30 +1,42 @@
 # Notes
 
-## Session 3
+## Session 4
 
-### Data
+### Interactions and interfaces
 
-- Anything can be data in a general. context
-- Data vs information: context is the key
-- Data often does not have context
+What is an interface?
 
-### Data and Computers
+Ethimology: between faces -> a wide way to communicate between actors and machine, actos and actors or machines and machines.
 
-- for computers to be able to understand data, we need to be able to translate them to numbers
-- We can use anithing as data in coding as long as we express it in numbers
-- for example, images are made of pixels, pixels are made up of 3 values (R,G,B) 
+Medium - is the specific mode of comunication
 
-### Sound as Data
+Interface - how we comunicate (API's where an interface)
 
-Sound data is expressed as the position of the speaker membrane, in a list of numbers, typically between -1 and 1
+ex. text, keyboard, voice
 
+#### Interfaces in computing
 
-### JSON
+- Physical interfaces: moved, touched, clicked on
+- Digital interfaces
+- Voice interfaces
+- Graphic interfaces: usually digital
+- Phygital (physical-digital) interfaces
+- Text interfaces
+- Movement interfaces
 
-JavaScript Object Notation
+#### Interfaces on the web
 
-JSON is a PLAIN TEXT FORMAT for storing and transporting data, used to send, receive and store data.
+- Text forms
+- Buttons
+- Sliders
+- Radio buttons
+- Tick Boxes
+- Drop down lists
+- AI-supported (speech, video, images, etc)
 
-Example
+Interfaces creative technologists usually work with
 
-("name": "John", "age": 30, "car": null)
+- Graphic User Interface (GUI)
+- Text interface, ex. Command Line Interface (CLI)
+- Keyboard + Mouse
+

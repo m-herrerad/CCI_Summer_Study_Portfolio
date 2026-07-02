@@ -8,11 +8,11 @@ For example, to create complex shapes in processing I would use "begingShape()" 
 
 ### Task 1 - Self Portrait
 
-![Self Portrait](/Blog/assets/Self_Portrait_1.png)
+![Self Portrait](/Blog/assets/Session_01/Self_Portrait_1.png)
 
-![Self Portrait](/Blog/assets/Self_Portrait_2.png)
+![Self Portrait](/Blog/assets/Session_01/Self_Portrait_2.png)
 
-![Self Portrait](/Blog/assets/Self_Portrait_3.png)
+![Self Portrait](/Blog/assets/Session_01/Self_Portrait_3.png)
 
 This self-portrait depicts me, in a Gravity Falls/Star vs the forces of evil (two of my favourite shows) style, using simple 2D shapes.Additionally, the mouse controls the position of the eyes, using math to create a range so the pupils dont leave the whites and it looks like the eyes are moving.
 
@@ -22,20 +22,20 @@ Repetition is always present in our lives, and as such, is important to know how
 
 #### Annie Alberts inspired art
 
-![Annie Alberts inspired art](/Blog/assets/AnnieAlbertsInspired.png)
+![Annie Alberts inspired art](/Blog/assets/Session_02/AnnieAlbertsInspired.png)
 
 Also, custom functions are very important to achive this, because they allow us to save information onece and then recall it with modifications, making our lives easier and our codes more simple.
 
-![Arrays, Loops and Functions](/Blog/assets/Dino_AnnieA.png)
+![Arrays, Loops and Functions](/Blog/assets/Session_02/Dino_AnnieA.png)
 
 
 ### Task 2 - Arrays, Loops and Functions
 
-![Arrays, Loops and Functions](/Blog/assets/Functions.png)
+![Arrays, Loops and Functions](/Blog/assets/Session_02/Functions.png)
 
-![Arrays, Loops and Functions](/Blog/assets/Arrays_2.png)
+![Arrays, Loops and Functions](/Blog/assets/Session_02/Arrays_2.png)
 
-![Task 02](/Blog/assets/Task_2.png)
+![Task 02](/Blog/assets/Session_02/Task_2.png)
 
 I try to add some type of interaction in all my pieces, here, asside from the flowers changing places and rotating, the pattern od dinosaurs changing colors, and the big dinosaur's position in the canvas being controled by the mouse.
 
@@ -45,14 +45,21 @@ Being able to use API's and data is important for coding and it can be also very
 
 ### Task 3 - Using Data and API's to create artworks
 
-![Task 03](/Blog/assets/Task.png)
+![Task 03](/Blog/assets/Session_03/Task.png)
 
 This work maps the causes of death; "Diseases of Heart", "Malignant Neoplasms", "Covid", "Self-Harm", "Assault", in NYC from 2007 to 2001. From left to right we see the changes in the amount of death cases per cause represented by a color; "Diseases of Heart": red , "Malignant Neoplasms": magenta, "Covid": orange, "Self-Harm": green, "Assault": light blue. It shows how many deaths per year are for each cause, and although the placement on the canvas is not dependent on the amount of deaths (it is random and reorganizes every time it reloads), each line represents 150 deaths.
 
-![Task 03 Mouse Disturbance 1](/Blog/assets/Mouse1.png)
+![Task 03 Mouse Disturbance 1](/Blog/assets/Session_03/Mouse1.png)
 
-![Task 03 Mouse Disturbance 2](/Blog/assets/Mouse2.png)
+![Task 03 Mouse Disturbance 2](/Blog/assets/Session_03/Mouse2.png)
 
 Aditionally, the mouse disturbs the curves allong its path, to create a sort of interactive add-on to the artwork, but it doesn't impact the way the information shows on the screen.
 
 ## Session 4
+
+This class we started working with interactions.
+
+![Lab 04 Interactive Collage](/Blog/assets/Session_04/Collage_1.png)
+![Lab 04 Interactive Collage](/Blog/assets/Session_04/Collage_2.png)
+![Lab 04 Interactive Collage](/Blog/assets/Session_04/Collage_3.png)
+![Lab 04 Interactive Collage](/Blog/assets/Session_04/Collage_4.png)

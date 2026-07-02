@@ -1,101 +1,103 @@
-let table;
-let causes = ["Diseases of Heart", "Malignant Neoplasms", "Covid", "Self-Harm", "Assault"];
-let causeColor = [];
-let causeLaneY = [450, 450, 450, 450, 450];
-let years = [2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021];
-let edges = [];
-let loadError = null;
+let persons = [];
+let personFiles = ["Person_1", "Person_2", "Person_3", "Person_4", "Person_5", "Person_6", "Person_7"];
+let currentPersonIndex = 0; // which person is currently shown — changed by pressing 'p'
+
+let texts = [];
+let textFiles = ["Text_1", "Text_2", "Text_3"];
+let textSwitchInterval = 10; // frames between automatic font swaps
+
+let features = [];
+let featureNames = [
+  "Nose_1", "Nose_2", "Nose_3", "Nose_4", "Nose_5", "Nose_6", "Nose_7",
+  "Eye_1", "Eye_2", "Eye_3", "Eye_4", "Eye_5", "Eye_6",
+  "Mouth_1", "Mouth_2", "Mouth_3", "Mouth_4", "Mouth_5", "Mouth_6", "Mouth_7"
+];
+
+let draggedFeature = null; // whichever feature is currently being dragged, or null
+let bgColor;
 
 async function setup() {
-  createCanvas(1400, 900);
+  createCanvas(1500, 920);
+  imageMode(CENTER); // every image() call below treats x,y as the image's center
 
-  causeColor = [
-    'red',
-    'magenta',
-    'orange',
-    'green',
-    'lightblue'
-  ];
+  bgColor = color(48, 70, 94); 
 
-  
-  table = await loadTable('assets/New_York_City_Leading_Causes_of_Death_20260701.csv', ',', 'header');
-
-  let totals = {};
-  for (let c = 0; c < causes.length; c++) {
-    totals[c] = {};
-    for (let y of years) totals[c][y] = 0;
+  // PERSONS
+  for (let file of personFiles) {
+    let per = await loadImage('/Session_04/Task_04/assets/Imagenes/' + file + ".png");
+    persons.push(per);
   }
 
-  for (let r = 0; r < table.getRowCount(); r++) {
-    let row = table.getRow(r);
-    let causeText = row.get('Leading Cause');
-    let year = Number(row.get('Year'));
-    let deaths = Number(row.get('Deaths'));
-    if (isNaN(deaths)) continue;
-
-    for (let c = 0; c < causes.length; c++) {
-      if (causeText.includes(causes[c])) {
-        totals[c][year] += deaths;
-      }
-    }
+  // TEXTS — renamed the loop variable to avoid shadowing p5's built-in text() function
+  for (let file of textFiles) {
+    let img = await loadImage('/Session_04/Task_04/assets/Imagenes/' + file + ".png");
+    texts.push(img);
   }
 
-  for (let c = 0; c < causes.length; c++) {
-    let pointsByYear = {};
-
-    for (let y of years) {
-      let n = Math.max(1, Math.round(totals[c][y] / 150));
-      let x = map(y, 2007, 2021, 0, width);
-      let pts = [];
-      for (let i = 0; i < n; i++) {
-        pts.push({ x: x, y: causeLaneY[c] + random(-380, 380) });
-      }
-      pointsByYear[y] = pts;
-    }
-
-    for (let yi = 0; yi < years.length - 1; yi++) {
-      let ptsA = pointsByYear[years[yi]];
-      let ptsB = pointsByYear[years[yi + 1]];
-      let countA = ptsA.length;
-      let countB = ptsB.length;
-
-      if (countB >= countA) {
-        for (let j = 0; j < countB; j++) {
-          let i = Math.floor(j * countA / countB);
-          edges.push({ c: c, a: ptsA[i], b: ptsB[j] });
-        }
-      } else {
-        for (let i = 0; i < countA; i++) {
-          let j = Math.floor(i * countB / countA);
-          edges.push({ c: c, a: ptsA[i], b: ptsB[j] });
-        }
-      }
-    }
+  // FACE FEATURES — scattered on the left, like your reference image
+  for (let name of featureNames) {
+    let img = await loadImage('/Session_04/Task_04/assets/Imagenes/' + name + ".png");
+    features.push({
+      name: name,
+      img: img,
+      x: random(60, 700),
+      y: random(500, 900),
+      w: 200,
+      h: 200
+    });
   }
 }
 
 function draw() {
-  background(0);
+  background(bgColor); // clears every frame — without this, dragged features leave trails behind
 
-  for (let e of edges) {
-    stroke(causeColor[e.c]);
-    strokeWeight(0.6);
-    noFill();
+  // current person, large, on the right side
+  image(persons[currentPersonIndex], 1050, 550, 800, 800);
 
-    let midX = (e.a.x + e.b.x) / 2;
-    let midY = (e.a.y + e.b.y) / 2;
+  // animated text, top-left, cycling through the 3 font PNGs automatically
+  let textIndex = floor(frameCount / textSwitchInterval) % texts.length;
+  image(texts[textIndex], 400, 200, 700, 430);
 
-    let d = dist(mouseX, mouseY, midX, midY);
-    let windStrength = constrain(map(d, 0, 250, 60, 0), 0, 60);
-    let angle = Math.atan2(midY - mouseY, midX - mouseX);
-    let windX = Math.cos(angle) * windStrength;
-    let windY = Math.sin(angle) * windStrength;
+  // the pile of draggable features
+  for (let f of features) {
+    image(f.img, f.x, f.y, f.w, f.h);
+  }
+}
 
-    bezier(
-      e.a.x, e.a.y,
-      midX + windX, e.a.y + windY,
-      midX + windX, e.b.y + windY,
-      e.b.x, e.b.y
-    );
+function mousePressed() {
+  // find the topmost feature under the cursor and start dragging it
+  // looping backwards so features drawn last (on top) get picked first
+  for (let i = features.length - 1; i >= 0; i--) {
+    let f = features[i];
+    let halfW = f.w / 2;
+    let halfH = f.h / 2;
+    if (mouseX > f.x - halfW && mouseX < f.x + halfW &&
+        mouseY > f.y - halfH && mouseY < f.y + halfH) {
+      draggedFeature = f;
+      selectedFeature = f;
+    }
+  }
+}
+
+function mouseDragged() {
+  if (draggedFeature) {
+    draggedFeature.x = mouseX;
+    draggedFeature.y = mouseY;
+  }
+}
+
+function mouseReleased() {
+  draggedFeature = null;
+}
+
+function keyPressed() {
+  if (key === 'p') {
+    currentPersonIndex = floor(random(persons.length));
+  } else if (keyCode === 38) {
+    selectedFeature.w = constrain(selectedFeature.w + 10, 20, 400);
+    selectedFeature.h = constrain(selectedFeature.h + 10, 20, 400);
+  } else if (keyCode === 40) {
+    selectedFeature.w = constrain(selectedFeature.w - 10, 20, 400);
+    selectedFeature.h = constrain(selectedFeature.h - 10, 20, 400);
   }
 }
